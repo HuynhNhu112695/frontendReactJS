@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 
 import * as actions from "../../store/actions";
 import './Login.scss';
+import { handleLoginApi } from '../../services/userService';
 
 class Login extends Component {
     constructor(props) {
@@ -33,9 +34,10 @@ class Login extends Component {
         })
     }
 
-    handleLogin = (event) => {
+    handleLogin = async () => {
         console.log("all state: ", this.state)
         console.log("username: ", this.state.username, "password: ", this.state.password)
+        await handleLoginApi(this.state.username, this.state.password);
     }
 
     render() {
@@ -62,7 +64,7 @@ class Login extends Component {
                                     onChange={(event) => this.handleOnChangePassword(event)} />
                                 <span
                                     onClick={() => this.handleShowHidePassword()}>
-                                    <i class={this.state.isShowPassword ? 'far fa-eye' : 'far fa-eye-slash'}></i>
+                                    <i className={this.state.isShowPassword ? 'far fa-eye' : 'far fa-eye-slash'}></i>
                                 </span>
                             </div>
                         </div>
